@@ -1,4 +1,4 @@
-#summary - Crude details about the this library (version 2.00) I wrote for version 2 (Hyperion) of Open Flash Chart.
+#summary Crude details about the this library (version 2.00) I wrote for version 2 (Hyperion) of Open Flash Chart.
 #labels Phase-Design,Phase-Implementation
 
 = Introduction =
