@@ -1,0 +1,177 @@
+#summary Short tutorial on how to use the Python libraries with Open Flash Chart
+
+= Introduction =
+
+This tutorial will show you the differences and similarities of creating the required data string between the PHP and Python libraries.  The PHP libraries are used on the official Open Flash Chart website for the examples.
+
+
+= Version 1.9.7 of Open Flash Chart =
+We will see how you would make a simple chart with three different lines as per example here (without the randomness): http://teethgrinder.co.uk/open-flash-chart/gallery-data.php
+
+*PHP*
+{{{
+<?php
+
+// create data arrays
+$data_1 = array(19,17,19,19,17,19,17,17,14,14,17,16);
+$data_2 = array(12,10,8,10,13,9,8,10,8,10,10,8);
+$data_3 = array(7,6,2,6,6,4,3,2,5,4,2,5);
+
+include_once( 'ofc-library/open-flash-chart.php' );
+$g = new graph();
+$g->title( 'Many data lines', '{font-size: 20px; color: #736AFF}' );
+
+// we add 3 sets of data:
+$g->set_data( $data_1 );
+$g->set_data( $data_2 );
+$g->set_data( $data_3 );
+
+// we add the 3 line types and key labels
+$g->line( 2, '0x9933CC', 'Page views', 10 );
+$g->line_dot( 3, 5, '0xCC3399', 'Downloads', 10);    // <-- 3px thick + dots
+$g->line_hollow( 2, 4, '0x80a033', 'Bounces', 10 );
+
+$g->set_x_labels( array( 'January','February','March','April','May','June','July',
+                         'August','Spetember','October','November','December' ) );
+$g->set_x_label_style( 10, '0x000000', 0, 2 );
+
+$g->set_y_max( 20 );
+$g->y_label_steps( 4 );
+$g->set_y_legend( 'Open Flash Chart', 12, '#736AFF' );
+
+echo $g->render();
+
+?>
+}}}
+
+*Python*
+{{{
+from	OpenFlashChart import *		# Flash based charting library
+
+def line_demo(self):            # 'self' required if function is defined in a class.
+
+  # create data arrays
+  data_1 = [19,17,19,19,17,19,17,17,14,14,17,16]
+  data_2 = [12,10,8,10,13,9,8,10,8,10,10,8]
+  data_3 = [7,6,2,6,6,4,3,2,5,4,2,5]
+
+  g = graph()
+  g.title( 'Many data lines', '{font-size: 20px; color: #736AFF}' )
+
+  # we add 3 sets of data:
+  g.set_data( data_1 )
+  g.set_data( data_2 )
+  g.set_data( data_3 )
+
+  # we add the 3 line types and key labels
+  g.line( 2, '0x9933CC', 'Page views', 10 )
+  g.line_dot( 3, 5, '0xCC3399', 'Downloads', 10)    # <-- 3px thick + dots
+  g.line_hollow( 2, 4, '0x80a033', 'Bounces', 10 )
+
+  g.set_x_labels( ['January,February,March,April,May,June,July,' +
+                   'August,Spetember,October,November,December'] )
+  g.set_x_label_style( 10, '0x000000', 0, 2 )
+
+  g.set_y_max( 20 )
+  g.y_label_steps( 4 )
+  g.set_y_legend( 'Open Flash Chart', 12, '#736AFF' )
+		
+  return g.render()
+}}}
+
+The Python library is missing features to customise the tooltip, adding links to charts other than pies, and possibly other decorative features that I cannot remember right now.
+
+= Version 2 of Open Flash Chart =
+We will see how you would make a simple chart with three different lines as per example here (without the randomness): http://teethgrinder.co.uk/open-flash-chart-2/data-lines-2.php
+
+*PHP*
+{{{
+<?php
+
+include '../php-ofc-library/open-flash-chart.php';
+
+// create data arrays
+$data_1 = array(19,17,19,19,17,19,17,17,14,14,17,16);
+$data_2 = array(12,10,8,10,13,9,8,10,8,10,10,8);
+$data_3 = array(7,6,2,6,6,4,3,2,5,4,2,5);
+
+$line_dot = new line_dot();
+$line_dot->set_width( 4 );
+$line_dot->set_colour( '#DFC329' );
+$line_dot->set_dot_size( 5 );
+$line_dot->set_values( $data_1 );
+$line_dot->set_key( "Line 1", 10 );
+
+$line_hollow = new line_hollow();
+$line_hollow->set_width( 1 );
+$line_hollow->set_colour( '#6363AC' );
+$line_hollow->set_dot_size( 5 );
+$line_hollow->set_values( $data_2 );
+$line_hollow->set_key( "Line 2", 10 );
+
+$line = new line();
+$line->set_width( 1 );
+$line->set_colour( '#5E4725' );
+$line->set_dot_size( 5 );
+$line->set_values( $data_3 );
+$line->set_key( "Line 3", 10 );
+
+$y = new y_axis();
+$y->set_range( 0, 20, 5 ); 
+
+$chart = new open_flash_chart();
+$chart->set_title( new title( 'Three lines example' ) );
+$chart->set_y_axis( $y );
+//
+// here we add our data sets to the chart:
+//
+$chart->add_element( $line_dot );
+$chart->add_element( $line_hollow );
+$chart->add_element( $line );
+
+echo $chart->toPrettyString();
+}}}
+
+*Python*
+{{{
+import	math
+import	openFlashChart
+from	openFlashChart_varieties import ( Line,
+                                          Line_Dot,
+                                          Line_Hollow )
+
+def line(self):            # 'self' required if function is defined in a class.
+
+  # create data arrays
+  data_1 = [19,17,19,19,17,19,17,17,14,14,17,16]
+  data_2 = [12,10,8,10,13,9,8,10,8,10,10,8]
+  data_3 = [7,6,2,6,6,4,3,2,5,4,2,5]
+
+  plot1 = Line_Dot( text = "Line 1", fontsize = 10, colour = '#DFC329', values = data_1 )
+  plot1.set_width( 4 )
+# plot1.set_colour( '#DFC329' )
+  plot1.set_dot_size( 5 )
+
+  plot2 = Line_Hollow( text = "Line 2", fontsize = 10, colour = '#6363AC', values = data_2 )
+  plot2.set_width( 1 )
+# plot2.set_colour( '#6363AC' )
+  plot2.set_dot_size( 5 )
+
+  plot3 = Line( text = "Line 3", fontsize = 10, colour = '#5E4725', values = data_3 )
+  plot3.set_width( 1 )
+# plot3.set_colour( '#5E4725' )
+  plot3.set_dot_size( 5 )
+
+  chart = openFlashChart.template( 'Three lines example' )
+  chart.set_y_axis(min = 0, max = 20, steps = 5)
+  #
+  # here we add our data sets to the chart:
+  #
+  chart.add_element( plot1 )
+  chart.add_element( plot2 )
+  chart.add_element( plot3 )
+
+  return chart.encode()
+}}}
+
+The python library is missing the shape and shape_point classes so shapes cannot be drawn at this point.
