@@ -1,0 +1,32 @@
+#labels Phase-Design,Phase-Implementation
+#Crude details about the this library (version 1.00) I wrote for version 1.9.7 of Open Flash Chart.
+
+= Introduction =
+
+Version 1.00 of this library was based entirely on the existing Python library written by an anonymous developer.  This library was included with prior versions of Open Flash Chart.
+
+
+= Details =
+I ported as much as I could of the open flash chart features that were not included in version 1.96
+
+Here's a list of features I've ported:
+  * 3D Bar chart
+  * Glass Bar chart
+  * Fade Bar chart
+  * Sketch Bars
+  * Pie Chart with links
+  * Scatter chart
+  * High Low Close chart
+  * Candle
+
+  * Tool tips
+  * Right Y axis and Legend
+  * Number formatting
+  * X-offset
+  * Y-min/max
+
+Most of the methods are called in the same way as in your php code.  The demo file demonstrates all the charts available and uses data from your own samples. !CherryPy is used in the demo for web serving.  "!CherryPy is a pythonic, object-oriented HTTP framework."  It can be found at http://cherrypy.org
+
+Some differences:
+  * When making a pie chart, the method to use is called "pie_chart".
+  * There is no separate "key" method for defining the look of the legend key for each data set. This is because the legend key is defined when you set up a chart. Eg, line_dot( line_width, dot_size, line_colour, key_string, key_size )
