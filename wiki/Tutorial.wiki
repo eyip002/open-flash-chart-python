@@ -1,4 +1,5 @@
 #summary Short tutorial on how to use the Python libraries with Open Flash Chart
+#labels Featured
 
 = Introduction =
 
