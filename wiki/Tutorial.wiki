@@ -81,7 +81,7 @@ def line_demo(self):            # 'self' required if function is defined in a cl
 
 The Python library is missing features to customise the tooltip, adding links to charts other than pies, and possibly other decorative features that I cannot remember right now.
 
-= Version 2 of Open Flash Chart =
+= Version 2 (Hyperion) of Open Flash Chart =
 We will see how you would make a simple chart with three different lines as per example here (without the randomness): http://teethgrinder.co.uk/open-flash-chart-2/data-lines-2.php
 
 *PHP*
@@ -174,4 +174,4 @@ def line(self):            # 'self' required if function is defined in a class.
   return chart.encode()
 }}}
 
-The python library is missing the shape and shape_point classes so shapes cannot be drawn at this point.
+Currently the python library is missing the shape and shape_point classes so shapes cannot be drawn. Attributes of chart plots can be set on creation but they can also be set after creation just like the PHP library.  Attributes include alpha, colour (of line, bar, etc), text (key), font-size (of key) and values.
