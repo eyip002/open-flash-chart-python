@@ -6,6 +6,8 @@ This tutorial will show you the differences and similarities of creating the req
 
 
 = Version 1.9.7 of Open Flash Chart =
+A very short description of the Python library used is found here: [VersionOne]
+
 We will see how you would make a simple chart with three different lines as per example here (without the randomness): http://teethgrinder.co.uk/open-flash-chart/gallery-data.php
 
 *PHP*
@@ -82,6 +84,8 @@ def line_demo(self):            # 'self' required if function is defined in a cl
 The Python library is missing features to customise the tooltip, adding links to charts other than pies, and possibly other decorative features that I cannot remember right now.
 
 = Version 2 (Hyperion) of Open Flash Chart =
+A very short description of the Python library used is found here: [VersionTwo]
+
 We will see how you would make a simple chart with three different lines as per example here (without the randomness): http://teethgrinder.co.uk/open-flash-chart-2/data-lines-2.php
 
 *PHP*
