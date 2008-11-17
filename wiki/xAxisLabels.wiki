@@ -1,0 +1,42 @@
+#summary Short description of the classes x_axis_label and x_axis_labels for customising the labels that appear long the x_axis.
+#labels Phase-Implementation
+
+= Introduction =
+
+The classes *x_axis_label* and *x_axis_labels*, found in *openFlashChart_varieties.py*, provide the ability to customise the labels that appear along the x_axis.
+
+
+= Details =
+*x_axis_labels* accepts:
+  * an array of labels
+  * a number to describe the steps to use
+  * the colour of the labels
+  * the font-size of the labels
+  * a value for rotation
+
+ This class can be used like so:
+{{{
+chart = openFlashChart.template( "Testing chart" )
+customLabels = x_axis_labels( labels = ['1', 'q', 'f', 'h', 't', '8', '9', 'x', 't', 't'] )
+chart.set_x_axis( labels = customLabels, steps = 2, rotate = 30) )
+}}}
+
+ Now you should see the custom labels being displayed in the x_axis on every second 'tick'.  Each label should also be rotated 30 degrees.
+
+=  =
+
+*x_axis_label* (singular) allows the ability to customise a single label.  It accepts:
+  * a string for the label text you want displayed
+  * the colour of the label
+  * font-size of the label
+  * a value for rotation
+
+ This class can be used like so:
+{{{
+chart = openFlashChart.template( "Testing chart" )
+oneCustomLabel = x_axis_label(  'custom!!', '#2683CF', 24, 'diagonal' )
+customLabels = x_axis_labels( labels = ['1', 'q', 'f', 'h', 't', '8', '9', 'x', 't', 't', oneCustomLabel] )
+chart.set_x_axis( labels = customLabels, steps = 2, rotate = 30) )
+}}}
+
+ Now the last label is a custom label which is rotated diagonally (about 300 degrees).
