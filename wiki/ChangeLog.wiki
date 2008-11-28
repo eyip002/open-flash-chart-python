@@ -7,6 +7,7 @@
 ||2.01||Added set functions to unique properties of chart types.||
 ||2.00||Took existing Python library written by Emanuel Fonseca that was bundled with Open Flash Chart and implemented 99% of the missing features.||
 
+=.=
 
 = Version 1 =
 ||Revision||Changes||
