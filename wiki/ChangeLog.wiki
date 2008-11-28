@@ -1,0 +1,13 @@
+#summary Change log for Python libraries
+#labels Featured,Phase-Design
+
+= Version 2 =
+||Revision||Changes||
+||2.02||Added Shape and shape_point classes so you can now draw shapes in Open Flash Chart.||
+||2.01||Added set functions to unique properties of chart types.||
+||2.00||Took existing Python library written by Emanuel Fonseca that was bundled with Open Flash Chart and implemented 99% of the missing features.||
+
+
+= Version 1 =
+||Revision||Changes||
+||1.00||Took existing Python library bundled with Open Flash Chart and implemented 95%-ish of the missing features.||
