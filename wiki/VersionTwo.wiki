@@ -36,7 +36,8 @@ Accordingly, openFlashChart.py imports the chart elements defined in openFlashCh
        Area_Hollow,
        Pie,
        Scatter,
-       Scatter_Line
+       Scatter_Line,
+       Shape
  )
 
  from openFlashChart_varieties import (
@@ -49,7 +50,8 @@ Accordingly, openFlashChart.py imports the chart elements defined in openFlashCh
        pie_value,
        scatter_value,
        x_axis_labels,
-       x_axis_label
+       x_axis_label,
+       shape_point
  )
 }}}
 
@@ -73,6 +75,7 @@ Chart types/varieties:
  + Scatter
  + Scatter Line
  + Radar
+ + Shapes
 }}}
 
 Chart elements:
@@ -92,7 +95,7 @@ Chart elements:
 
 To elaborate a bit more, individual data points can be customised for all charts.  The same goes for tooltips.  This was achieved through the creation of data value objects like bar_value, hbar_value, bar_stack_value, etc.  Some of the existing classes were also modified.  For example in tooltips, specifying the behaviour of the tooltip with mouse location was added in. Some bugs were spotted in the process.  For example, in some functions that accepted boolean values, the conditional evaluation for setting a dictionary value was incorrect.  The original test was for the truth of a value rather than the existence of a value.  This meant *None* and *False* were treated as the same which meant some settings were unable to be set as false.  As mentioned before, the interface for adding x axis labels is in the "wrong" place.
 
-I also wrote my own demo.py programme to show off the additions I made.  I also got some of the javascript features going as well.  Like the calling of a javascript function using on_click and loading new JSON data using load() defined in the ActionScript.  (Uses cherrypy)
+I also wrote my own demo.py programme to show off the additions I made.  I also got some of the JavaScript features going as well.  Like the calling of a JavaScript function using on_click and loading new JSON data using load() defined in the ActionScript.  (Uses cherrypy)
 
 *Differences:*
   * Instead of using separate functions (set_hover and set_proximity) set the same "mouse" value for tooltip, only one function is implemented that takes in the mouse behaviour as a string. This function is called set_behaviour() and is found in the tooltip class.
