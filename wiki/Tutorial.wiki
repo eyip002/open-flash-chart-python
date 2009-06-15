@@ -85,7 +85,7 @@ def line_demo(self):            # 'self' required if function is defined in a cl
 The Python library is missing features to customise the tooltip, adding links to charts other than pies, and possibly other decorative features that I cannot remember right now.
 
 = Version 2 (Hyperion) of Open Flash Chart =
-A very short description of the Python library used is found here: [VersionTwo]
+A very short description of the Python library used is found here: [VersionTwoOld]
 
 We will see how you would make a simple chart with three different lines as per example here (without the randomness): http://teethgrinder.co.uk/open-flash-chart-2/data-lines-2.php
 
@@ -179,4 +179,115 @@ def line(self):            # 'self' required if function is defined in a class.
   return chart.encode()
 }}}
 
-Currently the python library is missing the shape and shape_point classes so shapes cannot be drawn. Attributes of chart plots can be set on creation but they can also be set after creation just like the PHP library.  Attributes include alpha, colour (of line, bar, etc), text (key), font-size (of key) and values.
+Attributes of chart plots can be set on creation but they can also be set after creation just like the PHP library.  Attributes include alpha, colour (of line, bar, etc), text (key), font-size (of key) and values.
+
+= Version 2 (Jörmungandr) of Open Flash Chart =
+A very short description of the Python library used is found here: [VersionTwo]
+
+We will see how you would make a simple chart with three different lines as per example here (without the randomness): http://teethgrinder.co.uk/open-flash-chart-2/data-lines-2.php
+
+*PHP*
+{{{
+<?php
+
+include '../php-ofc-library/open-flash-chart.php';
+
+// create data arrays
+$data_1 = array(19,17,19,19,17,19,17,17,14,14,17,16);
+$data_2 = array(12,10,8,10,13,9,8,10,8,10,10,8);
+$data_3 = array(7,6,2,6,6,4,3,2,5,4,2,5);
+
+$default_dot = new dot();
+$default_dot->size(5)->colour('#DFC329');
+
+$line_dot = new line();
+$line_dot->set_default_dot_style($default_dot);
+$line_dot->set_width( 4 );
+$line_dot->set_colour( '#DFC329' );
+$line_dot->set_values( $data_1 );
+$line_dot->set_key( "Line 1", 10 );
+
+$default_hollow_dot = new hollow_dot();
+$default_hollow_dot->size(5)->colour('#6363AC');
+
+$line_hollow = new line();
+$line_hollow->set_default_dot_style($default_hollow_dot);
+$line_hollow->set_width( 1 );
+$line_hollow->set_colour( '#6363AC' );
+$line_hollow->set_values( $data_2 );
+$line_hollow->set_key( "Line 2", 10 );
+
+$star = new star();
+$star->size(5);
+
+$line = new line();
+$line_hollow->set_default_dot_style($star);
+$line->set_width( 1 );
+$line->set_colour( '#5E4725' );
+$line->set_values( $data_3 );
+$line->set_key( "Line 3", 10 );
+
+$y = new y_axis();
+$y->set_range( 0, 20, 5 ); 
+
+$chart = new open_flash_chart();
+$chart->set_title( new title( 'Three lines example' ) );
+$chart->set_y_axis( $y );
+//
+// here we add our data sets to the chart:
+//
+$chart->add_element( $line_dot );
+$chart->add_element( $line_hollow );
+$chart->add_element( $line );
+
+echo $chart->toPrettyString();
+}}}
+
+*Python*
+{{{
+from OpenFlashChart import Chart
+
+// create data arrays
+element1 = Chart()
+element1.values =  [19,17,19,19,17,19,17,17,14,14,17,16]
+element1.type = "line"
+element1.dot_style.type = "dot"
+element1.dot_style.dot_size = 5
+element1.dot_style.colour = "#DFC329"
+element1.width = 4
+element1.colour = "#DFC329"
+element1.text = "Line 1"
+element1.font_size = 10
+
+element2 = Chart()
+element2.values = [12,10,8,10,13,9,8,10,8,10,10,8]
+element2.type = "line"
+element2.dot_style.type = "star"
+element2.dot_style.dot_size = 5
+element2.width = 1
+element2.colour = "#6363AC"
+element2.text = "Line 2"
+element2.font_size = 10
+
+element3 = Chart()
+element3.values = [7,6,2,6,6,4,3,2,5,4,2,5]
+element3.type = "line"
+element3.width = 1
+element3.colour = "#5E4725"
+element3.text = "Line 3"
+element3.font_size = 10
+
+chart = Chart()
+chart.y_axis.min = 0
+chart.y_axis.max = 20
+chart.y_axis.font_size = 10
+
+chart.title.text = "Three lines example"
+
+#
+# here we add our data sets to the chart:
+#
+chart.elements = [element1, element2, element3]
+
+print chart.create()
+}}}
