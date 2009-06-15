@@ -1,0 +1,109 @@
+#summary Crude details about the this library (version 2.00) I wrote for version 2 (Hyperion) of Open Flash Chart.
+#labels Phase-Design,Phase-Implementation,Deprecated
+
+= Introduction =
+
+Version 2.00 of this library was based entirely on the existing Python library written by Emanuel Fonseca (emdfonseca _at_ gmail _dot _ com) that was included in the Gamera release of Open Flash Chart 2.
+
+
+= Details =
+Finally finished the (re)writing of the Open Flash Chart API library for Python.  Only too three whole days to understand what was going on with the JSON.  I think the hardest thing to understand was the use of x_axis_labels and x_axis_label objects to store the labels of the x-axis labels which is then assigned to the label variable in set_x_axis.  It feels a little convoluted because in the JSON, you have an entry called "label" and inside that you have an entry which is also called "label".  With the rewrite, some of the objects/functions are different places and they don't have the same interface as the PHP implementation.  The fact that the axes do not come together at (0, 0) bothers me because when the axes have significant thickness it looks like one giant pixel has been taken out of it.  Anyway, onto the actual changes.
+
+*Filenames:*
+  * Filename *ofc2.py* changed to *openFlashChart.py*
+  * Filename *ofc2_element.py* changed to *openFlashChart_varieties.py*
+  * New file created called *openFlashChart_elements.py*
+
+The original names were confusing and contradictory in my view.  This was due to the way the key word element was used on the Open Flash Chart website and in the JSON strings.  On the website, Chart Elements is used to describe elements or properties of the charts that are independent of the chart type being drawn.  However in the JSON string, the entry elements contains a list of charts to draw.  Hence, ofc2_element.py was changed to openFlashChart_varieties.py to better reflect the purpose of the file to create different chart types.  Classes describing the properties of the chart were taken from ofc2.py and placed into a new file called openFlashChart_elements.py.
+
+Accordingly, openFlashChart.py imports the chart elements defined in openFlashChart_elements.py.  The only files required to use Open Flash Chart is openFlashChart.py and openFlashChart_varieties.py.  The only inconsistency with this is that x_axis_labels and x_axis_label are defined in openFlashChart_varieties.py when they should really be defined in openFlashChart_elements.py.  Having them defined in openFlashChart_elements.py was not ideal as the file should be hidden from the programmer.
+
+*Example of importing all the required classes to make charts:*
+{{{
+ import openFlashChart
+ from openFlashChart_varieties import (
+       Line,
+       Line_Dot,
+       Line_Hollow,
+       Bar,
+       Bar_Filled,
+       Bar_Glass,
+       Bar_3d,
+       Bar_Sketch,
+       HBar,
+       Bar_Stack,
+       Area_Line,
+       Area_Hollow,
+       Pie,
+       Scatter,
+       Scatter_Line,
+       Shape
+ )
+
+ from openFlashChart_varieties import (
+       hbar_value,
+       bar_value,
+       bar_3d_value,
+       bar_glass_value,
+       bar_sketch_value,
+       bar_stack_value,
+       pie_value,
+       scatter_value,
+       x_axis_labels,
+       x_axis_label,
+       shape_point
+ )
+}}}
+
+So what exactly has been implemented?  Well below is a list of features that have been implemented.  Those already existing in the Python library are denoted by a ( - ).  Those that have been added by myself are denoted by a ( + ).  This list has been compiled by taking the menu lists from the Open Flash Chart website.
+
+Chart types/varieties:
+{{{
+ - Line
+ + Line Dot
+ + Line Hollow
+ - Bar
+ + Bar Filled
+ + Bar Glass
+ + Bar 3D
+ + Bar Sketch
+ + Bar Horizontal
+ - Bar Stack
+ + Area
+ + Area Hollow
+ + Pie
+ + Scatter
+ + Scatter Line
+ + Radar
+ + Shapes
+}}}
+
+Chart elements:
+{{{
+ - Title
+ - X axis legend
+ - Y axis legend
+ - X axis
+ - Y axis
+ + Y axis (right)
+ + X axis labels
+ - Background colour
+ + Click events
+ + Floating bars
+ - Tooltip
+}}}
+
+To elaborate a bit more, individual data points can be customised for all charts.  The same goes for tooltips.  This was achieved through the creation of data value objects like bar_value, hbar_value, bar_stack_value, etc.  Some of the existing classes were also modified.  For example in tooltips, specifying the behaviour of the tooltip with mouse location was added in. Some bugs were spotted in the process.  For example, in some functions that accepted boolean values, the conditional evaluation for setting a dictionary value was incorrect.  The original test was for the truth of a value rather than the existence of a value.  This meant *None* and *False* were treated as the same which meant some settings were unable to be set as false.  As mentioned before, the interface for adding x axis labels is in the "wrong" place.
+
+I also wrote my own demo.py programme to show off the additions I made.  I also got some of the JavaScript features going as well.  Like the calling of a JavaScript function using on_click and loading new JSON data using load() defined in the ActionScript.  (Uses cherrypy)
+
+*Differences:*
+  * Instead of using separate functions (set_hover and set_proximity) set the same "mouse" value for tooltip, only one function is implemented that takes in the mouse behaviour as a string. This function is called set_behaviour() and is found in the tooltip class.
+  * Because the element classes were written to allow the necessary JSON strings to be created, little attention was drawn to make the elements as objects.  So an element is defined in one go on creation and adjustments to its properties after creation cannot be made.
+*To-Do:*
+  * Write classes and functions to implement the shape and shape_point objects to allow shapes to be drawn onto the chart canvas.  These will probably be written into openFlashChart_varieties.py even thought it's more suited for openFlashChart_elements.py given its independence of the chart type being drawn.
+  * Make the API more elegant to use.  Particularly the exposure of chart elements to the programmer so that it works more like the PHP implementation.
+
+I'm pretty happy with what I've been able to achieve in the last 3 days.  Apart from the first to-do item, I think I have implemented all the functionality that Open Flash Chart 2 offers.  I've set myself up well to upgrade my use of Open Flash Chart from version 1 to 2 for StockShaping.  The only other complaints I'd make (in addition to axes intersection) is the loss of the reload() function defined in ActionScript which would make its own call to fetch new data.  Instead, you have to fetch the data yourself and then pass it into Open Flash Chart through the load() function. Also, the file size of Open Flash Chart has ballooned up to about 256 kb from 64 kb which may be of concern for those wanting to view charts on a slow connection.  It's just the first request for Open Flash Chart that is important.  Subsequent calls should be a lot faster with caching turned on.  The last thing is the use of "*val*" and "*value*" in the JSON as keywords to mean the same thing.  Entries for both keywords are values to plot on the chart.  This discrepancy is unnecessary and added to the implementation time and increase in code usage to cater for it.
+
+*Demonstration:*  The demonstration file, *demo.py*, has a collection of examples that are based on those from the official Open Flash Chart website.  To run the demonstration, *cherrypy* and *cjson* are required.   "CherryPy is a pythonic, object-oriented HTTP framework." It can be found at http://cherrypy.org .  cjson is a "Fast JSON encoder/decoder for Python."  It can be found at http://pypi.python.org/pypi/python-cjson .
