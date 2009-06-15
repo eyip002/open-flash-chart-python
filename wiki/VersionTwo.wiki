@@ -33,36 +33,31 @@ chart.title.style = "{font-size: 20px; color: #F24062; text-align: center;}"
 chart.y_axis = {"min": 0, "max": 10}
 
 # Not like this!
-chart.y_axis.min = 0              # y_axis is created as an attribute of chart
+chart.y_axis.min = 0            # y_axis is created as an attribute of chart
 chart.y_axis = {"max": 10}    # y_axis is now a dictionary.  The "min" attribute is lost.
-chart.y_axis.steps = 2         # Since y_axis is a dictionary, the key "steps" is not valid
+chart.y_axis.steps = 2        # Since y_axis is a dictionary, the key "steps" is not valid
+
+# # #
+# Print out the chart's json string
+# # #
+print chart.create()
 }}}
 
 Python reserves the "dash" symbol for an operator and because some of the json names have a dash in them, they will cause problems when used in dot notation.  Hence, type those attribute names with an underscore in place of a dash instead:
 || Attribute name || Converted to ||
 
 
-Chart elements:
-{{{
- - Title
- - X axis legend
- - Y axis legend
- - X axis
- - Y axis
- + Y axis (right)
- + X axis labels
- - Background colour
- + Click events
- + Floating bars
- - Tooltip
-}}}
+3d is a special case ;-)
 
 
 
 =JSON format=
+Here
+
+
 
 =Demonstration:=
-I also wrote my own *Demo.py* script to demonstrate the use of the Python library.  I also got some of the JavaScript features going as well.  Like the calling of a JavaScript function using on_click and loading new JSON data using load() defined in the ActionScript.  (Uses Cherrypy)
+I the *Demo.py* script to demonstrate the use of the Python library.  I have some JavaScript features going as well: the calling of a JavaScript function using on_click and loading new JSON data using load() defined in the ActionScript.
 
 To run the demonstration, *cherrypy* and either *json* or *cjson* are required:
   * *json* is provided by Python 2.6 and 3.0.
