@@ -3,6 +3,7 @@
 
 = Version 2 =
 ||Revision||Changes||
+||2.10||Complete rewrite of the library.  Using instance attributes to set chart options.  _Should_ be more intuitive to use.  Just create a Chart instance and then type in the attribute names using dot notation.  Should be more resilient to future changes to Open Flash Chart's JSON format.
 ||2.02||Added Shape and shape_point classes so you can now draw shapes in Open Flash Chart.||
 ||2.01||Added set functions to unique properties of chart types.||
 ||2.00||Took existing Python library written by Emanuel Fonseca that was bundled with Open Flash Chart and implemented 99% of the missing features.||
