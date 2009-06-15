@@ -43,22 +43,18 @@ chart.y_axis.steps = 2        # Since y_axis is a dictionary, the key "steps" is
 print chart.create()
 }}}
 
-Python reserves the "dash" symbol for an operator and because some of the json names have a dash in them, they will cause problems when used in dot notation.  Hence, type those attribute names with an underscore in place of a dash instead:
-|| Attribute name || Converted to ||
-----
+Python reserves the "dash" symbol for an operator and because some of the json attributes have a dash in them, they will cause problems when used in dot notation.  Hence, type the following attribute names (underscore in place of a dash) instead:
+|| *Attribute name* || *Converted to* ||
 || on_show || on-show ||
 || on_click || on-click ||
 || start_angle || start-angle ||
-----
 || threeD || 3d ||
 || tick_height || tick-height ||
 || grid_colour || grid-colour ||
 || tick_length || tick-length ||
-----
 || dot_style || dot-style ||
 || dot_size || dot-size ||
 || halo_size || halo-size ||
-----
 || line_style || line-style ||
 || outline_colour || outline-colour ||
 || fill_alpha || fill-alpha ||
@@ -67,21 +63,21 @@ Python reserves the "dash" symbol for an operator and because some of the json n
 3d is a special case ;-)
 
 =Advanced=
-You can assign instances of Chart() to a Chart attribute.  This is useful when you want to create a container for each data group you want to plot.  You can create shapes as Chart() instances as well.
+Apart from using Chart() to create the graphing area, you can assign instances of Chart() to a Chart attribute.  This is useful when you want to create a container for each data group you want to plot.  You can create shapes as Chart() instances as well.
 
 For example, instead of:
 {{{
 chart = Chart()
 chart.elements = [
-                {
-              "type": "line",
-"values": [1,2,1]
-},
-                        {
-               "type": "bar",
-             "values": [10, 11, 2]
-}
- ]
+                     {
+                         "type": "line",
+                         "values": [1,2,1]
+                     },
+                     {
+                         "type": "bar",
+                         "values": [10, 11, 2]
+                     }
+                 ]
 }}}
 
 You can do:
@@ -98,7 +94,7 @@ chart = Chart()
 chart.elements = [element1, element2]
 }}}
 
-There's less curly bracket and quote clutter at the expense of retyping "element_." for each attribute.
+There's less curly bracket and quote clutter at the expense of retyping "element`_`." for each attribute.
 
 
 
