@@ -1,40 +1,46 @@
-#summary Crude details about the this library (version 2.10) I wrote for version 2 (Jörmungandr) of Open Flash Chart.
+#summary Crude details about the this library/module (version 2.10) I wrote for version 2 (Jörmungandr) of Open Flash Chart.
 #labels Phase-Design,Phase-Implementation
 
 = Introduction =
 
-Version 2.10 of this library was re-written from scratch to be much easier to use.  It removes the need to call functions when adding chart attributes and makes for an intuitive usage.  The library is also significantly smaller than previous versions.
+Version 2.10 of this library/module was re-written from scratch to be much easier to use.  It removes the need to call functions when adding chart attributes and makes for an intuitive usage.  The library is also significantly smaller than previous versions.
 
-This library takes the liberty of assuming the programmer is `*`smart`*`. 
+It is hoped that this new library can cater for new attributes added to Open Flash Chart without having to make modifications.
+
+This library does take the liberty of assuming the programmer is `*`smart`*`. 
 
 = Details =
 The most important file is called *OpenFlashChart.py*
 
 *To use the library:*
 {{{
+# Import the library/module
 from OpenFlashChart import Chart
+
+# # #
+# Create a Chart instance
+# # #
+chart = Chart()
+
+# Add in the title text and style
+# Type the attribute names using dot notation as they logically appear in the JSON format
+chart.title.text = "Title text"
+chart.title.style = "{font-size: 20px; color: #F24062; text-align: center;}"
+
+# Add in the y_axis attributes
+# Can enter using dot notation like before or use a dictionary.
+# Just don't mix and match!
+chart.y_axis = {"min": 0, "max": 10}
+
+# Not like this!
+chart.y_axis.min = 0              # y_axis is created as an attribute of chart
+chart.y_axis = {"max": 10}    # y_axis is now a dictionary.  The "min" attribute is lost.
+chart.y_axis.steps = 2         # Since y_axis is a dictionary, the key "steps" is not valid
 }}}
 
-All chart types/varieties should be supported:
-{{{
- - Line
- + Line Dot
- + Line Hollow
- - Bar
- + Bar Filled
- + Bar Glass
- + Bar 3D
- + Bar Sketch
- + Bar Horizontal
- - Bar Stack
- + Area
- + Area Hollow
- + Pie
- + Scatter
- + Scatter Line
- + Radar
- + Shapes
-}}}
+Python reserves the "dash" symbol for an operator and because some of the json names have a dash in them, they will cause problems when used in dot notation.  Hence, type those attribute names with an underscore in place of a dash instead:
+|| Attribute name || Converted to ||
+
 
 Chart elements:
 {{{
@@ -53,10 +59,12 @@ Chart elements:
 
 
 
+=JSON format=
+
 =Demonstration:=
 I also wrote my own *Demo.py* script to demonstrate the use of the Python library.  I also got some of the JavaScript features going as well.  Like the calling of a JavaScript function using on_click and loading new JSON data using load() defined in the ActionScript.  (Uses Cherrypy)
 
-To run the demonstration, *cherrypy* and either *json* or *cjson* are required.
+To run the demonstration, *cherrypy* and either *json* or *cjson* are required:
   * *json* is provided by Python 2.6 and 3.0.
   * "CherryPy is a pythonic, object-oriented HTTP framework." It can be found at http://cherrypy.org .
-  * cjson is a "Fast JSON encoder/decoder for Python."  It can be found at http://pypi.python.org/pypi/python-cjson.
+  * *cjson* is a "Fast JSON encoder/decoder for Python."  It can be found at http://pypi.python.org/pypi/python-cjson.
