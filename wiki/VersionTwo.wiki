@@ -7,7 +7,7 @@ Version 2.10 of this library/module was re-written from scratch to be much easie
 
 It is hoped that this new library can cater for new attributes added to Open Flash Chart without having to make modifications.
 
-This library does take the liberty of assuming the programmer is `*`smart`*`. 
+This library does take the liberty of assuming the programmer is `*`smart`*`.  The library does not do any lexical or grammar checking.
 
 = Details =
 The most important file is called *OpenFlashChart.py*
@@ -33,7 +33,7 @@ chart.title.style = "{font-size: 20px; color: #F24062; text-align: center;}"
 chart.y_axis = {"min": 0, "max": 10}
 
 # Not like this!
-chart.y_axis.min = 0            # y_axis is created as an attribute of chart
+chart.y_axis.min = 0          # y_axis is created as an attribute of chart
 chart.y_axis = {"max": 10}    # y_axis is now a dictionary.  The "min" attribute is lost.
 chart.y_axis.steps = 2        # Since y_axis is a dictionary, the key "steps" is not valid
 
@@ -45,15 +45,68 @@ print chart.create()
 
 Python reserves the "dash" symbol for an operator and because some of the json names have a dash in them, they will cause problems when used in dot notation.  Hence, type those attribute names with an underscore in place of a dash instead:
 || Attribute name || Converted to ||
-
+----
+|| on_show || on-show ||
+|| on_click || on-click ||
+|| start_angle || start-angle ||
+----
+|| threeD || 3d ||
+|| tick_height || tick-height ||
+|| grid_colour || grid-colour ||
+|| tick_length || tick-length ||
+----
+|| dot_style || dot-style ||
+|| dot_size || dot-size ||
+|| halo_size || halo-size ||
+----
+|| line_style || line-style ||
+|| outline_colour || outline-colour ||
+|| fill_alpha || fill-alpha ||
+|| gradient_fill || gradient-fill ||
 
 3d is a special case ;-)
+
+=Advanced=
+You can assign instances of Chart() to a Chart attribute.  This is useful when you want to create a container for each data group you want to plot.  You can create shapes as Chart() instances as well.
+
+For example, instead of:
+{{{
+chart = Chart()
+chart.elements = [
+                {
+              "type": "line",
+"values": [1,2,1]
+},
+                        {
+               "type": "bar",
+             "values": [10, 11, 2]
+}
+ ]
+}}}
+
+You can do:
+{{{
+element1 = Chart()
+element1.type = "line"
+element1.values = [1, 2, 1]
+
+element2 = Chart()
+element2.type = "bar"
+element2.values = [10, 11, 2]
+
+chart = Chart()
+chart.elements = [element1, element2]
+}}}
+
+There's less curly bracket and quote clutter at the expense of retyping "element_." for each attribute.
 
 
 
 =JSON format=
-Here
+Here is a (non-exhaustive) structure of the json expected by Open Flash Chart:
 
+
+Only elements, animation and values are arrays.  All others are dictionaries by default
 
 
 =Demonstration:=
