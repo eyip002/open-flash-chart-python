@@ -247,7 +247,7 @@ echo $chart->toPrettyString();
 {{{
 from OpenFlashChart import Chart
 
-// create data arrays
+// The data elements
 element1 = Chart()
 element1.values =  [19,17,19,19,17,19,17,17,14,14,17,16]
 element1.type = "line"
@@ -277,11 +277,11 @@ element3.colour = "#5E4725"
 element3.text = "Line 3"
 element3.font_size = 10
 
+# Create chart
 chart = Chart()
 chart.y_axis.min = 0
 chart.y_axis.max = 20
 chart.y_axis.font_size = 10
-
 chart.title.text = "Three lines example"
 
 #
