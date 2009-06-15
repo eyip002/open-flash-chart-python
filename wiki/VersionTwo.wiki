@@ -128,11 +128,11 @@ x_axis
  |   |- rotate
  |   |- colour
  |   |- size
- |   ```- labels
+ |   \- labels
  |       |- text
  |       |- colour
  |       |- size
- |       ```- rotate
+ |       \- rotate
 y_axis
  |- stroke
  |- tick-length
@@ -147,11 +147,11 @@ y_axis
  |   |- text
  |   |- colour
  |   |- size
- |   ```- labels
+ |   \- labels
  |       |- y
  |       |- text
  |       |- colour
- |       ```- size
+ |       \- size
 y_axis_right
  |- min
  |- max
@@ -186,7 +186,7 @@ elements
  |   |- left
  |   |- right
  |   |- x
- |   ```- y
+ |   \- y
  |- dot-style
  |   |- type
  |   |- dot-size
@@ -195,18 +195,18 @@ elements
  |   |- rotation
  |   |- sides
  |   |- tip
- |   ```- on-click
+ |   \- on-click
  |- on-show
  |   |- type
  |   |- cascade
- |   ```- delay
+ |   \- delay
 menu
  |- colour
  |- outline_colour
  |- values
  |   |- type
  |   |- text
- |   ```- javascript-function
+ |   \- javascript-function
 tooltip
  |- mouse
  |- shadow
