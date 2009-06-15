@@ -43,6 +43,9 @@ chart.y_axis.steps = 2        # Since y_axis is a dictionary, the key "steps" is
 print chart.create()
 }}}
 
+*Tooltip behaviour*
+Set tooltip to 1 for proximity and 2 for hover.  Default is 0.
+
 Python reserves the "dash" symbol for an operator and because some of the json attributes have a dash in them, they will cause problems when used in dot notation.  Hence, type the following attribute names (underscore in place of a dash) instead:
 || *Attribute name* || *Converted to* ||
 || on_show || on-show ||
@@ -99,10 +102,126 @@ There's less curly bracket and quote clutter at the expense of retyping "element
 
 
 =JSON format=
-Here is a (non-exhaustive) structure of the json expected by Open Flash Chart:
-
-
-Only elements, animation and values are arrays.  All others are dictionaries by default
+Here is a (non-exhaustive) structure of the json expected by Open Flash Chart ([http://teethgrinder.co.uk/open-flash-chart-2/json-format.php reference]):
+{{{
+title
+ |- text
+ |- style
+x_legend
+ |- text
+ |- style
+y_legend
+ |- text
+ |- style
+x_axis
+ |- stroke
+ |- tick-height
+ |- colour
+ |- grid-colour
+ |- offset
+ |- min
+ |- max
+ |- steps
+ |- 3d
+ |- labels
+ |   |- steps
+ |   |- rotate
+ |   |- colour
+ |   |- size
+ |   `- labels
+ |       |- text
+ |       |- colour
+ |       |- size
+ |       `- rotate
+y_axis
+ |- stroke
+ |- tick-length
+ |- colour
+ |- grid-colour
+ |- offset
+ |- min
+ |- max
+ |- steps
+ |- rotate
+ |- labels
+ |   |- text
+ |   |- colour
+ |   |- size
+ |   `- labels
+ |       |- y
+ |       |- text
+ |       |- colour
+ |       `- size
+y_axis_right
+ |- min
+ |- max
+ |- steps
+ |- stroke
+ |- colour
+ |- tick-length
+radar_axis
+ |- max
+ |- steps
+ |- colour
+ |- grid-colour
+elements
+ |- type
+ |- alpha
+ |- colour
+ |- colours
+ |- text
+ |- font-size
+ |- tip
+ |- start-angle
+ |- animate
+ |- width
+ |- loop
+ |- values
+ |   |- value
+ |   |- text
+ |   |- colour
+ |   |- tip
+ |   |- top
+ |   |- bottom
+ |   |- left
+ |   |- right
+ |   |- x
+ |   `- y
+ |- dot-style
+ |   |- type
+ |   |- dot-size
+ |   |- halo-size
+ |   |- colour
+ |   |- rotation
+ |   |- sides
+ |   |- tip
+ |   `- on-click
+ |- on-show
+ |   |- type
+ |   |- cascade
+ |   `- delay
+menu
+ |- colour
+ |- outline_colour
+ |- values
+ |   |- type
+ |   |- text
+ |   `- javascript-function
+tooltip
+ |- mouse
+ |- shadow
+ |- stroke
+ |- colour
+ |- background
+ |- title
+ |- body
+num_decimals
+is_fixed_num_decimals_forced
+is_decimal_separator_comma
+is_thousand_separator_disabled
+bg_colour
+ |-
+}}}
 
 
 =Demonstration:=
