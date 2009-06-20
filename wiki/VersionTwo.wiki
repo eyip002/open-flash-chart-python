@@ -183,6 +183,8 @@ elements
  |   |- tip
  |   |- top
  |   |- bottom
+ |   |- low
+ |   |- high
  |   |- left
  |   |- right
  |   |- x
