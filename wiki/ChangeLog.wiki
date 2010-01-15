@@ -3,6 +3,7 @@
 
 = Version 2 =
 ||Revision||Changes||
+||2.21||Added support for spoke-labels in radar charts||
 ||2.20||Added support for Lug Wyrm Charmer features: negative-colour for candle sticks and barb-length for arrows.||
 ||2.10||Complete rewrite of the library.  Using instance attributes to set chart options.  _Should_ be more intuitive to use.  Just create a Chart instance and then type in the attribute names using dot notation.  Should be more resilient to future changes to Open Flash Chart's JSON format.||
 ||2.02||Added Shape and shape_point classes so you can now draw shapes in Open Flash Chart.||
