@@ -62,6 +62,8 @@ Python reserves the "dash" symbol for an operator and because some of the json a
 || outline_colour || outline-colour ||
 || fill_alpha || fill-alpha ||
 || gradient_fill || gradient-fill ||
+|| negative_colour || negative-colour ||
+|| barb_length || barb-length ||
 
 3d is a special case ;-)
 
@@ -176,6 +178,9 @@ elements
  |- animate
  |- width
  |- loop
+ |- start
+ |- end
+ |-barb-length
  |- values
  |   |- value
  |   |- text
@@ -226,7 +231,7 @@ bg_colour
 
 
 =Demonstration:=
-I the *Demo.py* script to demonstrate the use of the Python library.  I have some JavaScript features going as well: the calling of a JavaScript function using on_click and loading new JSON data using load() defined in the ActionScript.
+Included in the download is the *Demo.py* script to demonstrate the use of the Python library.  I have some JavaScript features going as well: the calling of a JavaScript function using on_click and loading new JSON data using load() defined in the ActionScript.
 
 To run the demonstration, *cherrypy* and either *json* or *cjson* are required:
   * *json* is provided by Python 2.6 and 3.0.
