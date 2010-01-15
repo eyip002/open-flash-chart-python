@@ -1,4 +1,4 @@
-#summary Crude details about the this library/module (version 2.20) I wrote for version 2 (Jörmungandr, Kvasir) of Open Flash Chart.
+#summary Crude details about the this library/module (version 2.21) I wrote for version 2 (Jörmungandr, Kvasir) of Open Flash Chart.
 #labels Phase-Design,Phase-Implementation
 
 = Introduction =
