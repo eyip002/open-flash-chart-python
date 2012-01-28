@@ -247,7 +247,7 @@ echo $chart->toPrettyString();
 {{{
 from OpenFlashChart import Chart
 
-// The data elements
+# The data elements
 element1 = Chart()
 element1.values =  [19,17,19,19,17,19,17,17,14,14,17,16]
 element1.type = "line"
